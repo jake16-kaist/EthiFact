@@ -12,7 +12,7 @@ def extract_dois_from_metadata(metadata):
     dois = []
     if metadata and 'message' in metadata and 'reference' in metadata['message']:
         for ref in metadata['message']['reference']:
-            print(ref)
+            #print(ref)
             if 'DOI' in ref:
                 dois.append(ref['DOI'])
             else:
@@ -20,9 +20,12 @@ def extract_dois_from_metadata(metadata):
     return dois
 
 # Example usage
-doi = "10.1145/2840723"  # Replace with the actual DOI
-metadata = fetch_paper_metadata(doi)
-other_dois = extract_dois_from_metadata(metadata)
+#doi = "10.1145/2840723"  # Replace with the actual DOI
+#metadata = fetch_paper_metadata(doi)
+#other_dois = extract_dois_from_metadata(metadata)
+#print(other_dois)
 
-print("Extracted DOIs:", other_dois)
+def get_doi(doi):
+  other_dois = extract_dois_from_metadata(fetch_paper_metadata(doi))
+  return other_dois
  

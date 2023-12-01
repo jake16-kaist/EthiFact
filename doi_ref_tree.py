@@ -12,13 +12,14 @@ def build_reference_tree(root,doi,depth):
     if depth == 3:
         return root
     doi_list = get_doi(doi)
+    #print(doi_list)
     for i in doi_list:
       if i == "nodoi":
         t = Node(i, parent=root, score = 0)
-        return t
+        continue
       elif isSCI(get_prefix(i)) == True:
         t = Node(i, parent=root, score = 100)
-        return t
+        continue
       else: 
         t = Node(i, parent=root, score = -1)
         build_reference_tree(t,i,depth+1)
@@ -28,22 +29,41 @@ def visualize_tree_png(root):
 
 def visualize_tree_txt(root):
     for pre, fill, node in RenderTree(root):
-        print("%s%s" % (pre, node.name))
+        print("%s%s %f" % (pre, node.name, node.score))
 
 def get_score(root):
     score = 0
-    for i in root.descendants:
+    for i in root.children:
       if i.score == -1:
         if i.depth == 3:
           i.score = 50
-        i.score = get_score(i)
-      else: 
+        else:
+          i.score = get_score(i)
+      try: 
         score += i.score
-        score = score / len(root.descendants)
-    root.score = score
+        i.score = score / len(i.children)
+      except ZeroDivisionError as e:
+         continue
+    root.score = score / len(root.children)
+    return score
+
+def get_score2(root):
+    score = 0
+    for i in root.children:
+        if i.score == -1:
+          if i.depth == 3:
+            i.score = 50
+          else:
+            i.score = get_score2(i)
+        score += i.score
+    if len(root.children) != 0:
+      score = score / len(root.children)
+      root.score = score
+    return score
+    
 
     
-init_ref_list=[]
+init_ref_list=["10.1145/2840723"]
 for i in init_ref_list:
   if i == "nodoi":
     t = Node(i, parent=home, score = 0)
@@ -52,4 +72,6 @@ for i in init_ref_list:
   else:
     t = Node(i, parent=home, score = -1)
     build_reference_tree(t,i,1)
-get_score(home)
+get_score2(home)
+visualize_tree_txt(home)
+print(home.score)
