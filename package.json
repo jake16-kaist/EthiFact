@@ -1,0 +1,23 @@
+{
+  "name": "ethifact",
+  "version": "1.0.0",
+  "description": "KAIST 2023F CS489 Group Project EthiFact",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jake16-kaist/EthiFact.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jake16-kaist/EthiFact/issues"
+  },
+  "homepage": "https://github.com/jake16-kaist/EthiFact#readme",
+  "dependencies": {
+    "@webcomponents/custom-elements": "^1.6.0"
+  }
+}
