@@ -34,27 +34,11 @@ def visualize_tree_txt(root):
 def get_score(root):
     score = 0
     for i in root.children:
-      if i.score == -1:
-        if i.depth == 3:
-          i.score = 50
-        else:
-          i.score = get_score(i)
-      try: 
-        score += i.score
-        i.score = score / len(i.children)
-      except ZeroDivisionError as e:
-         continue
-    root.score = score / len(root.children)
-    return score
-
-def get_score2(root):
-    score = 0
-    for i in root.children:
         if i.score == -1:
           if i.depth == 3:
             i.score = 50
           else:
-            i.score = get_score2(i)
+            i.score = get_score(i)
         score += i.score
     if len(root.children) != 0:
       score = score / len(root.children)
@@ -63,15 +47,16 @@ def get_score2(root):
     
 
     
-init_ref_list=["10.1145/2840723"]
+init_ref_list=["10.3354/meps061061"]
 for i in init_ref_list:
   if i == "nodoi":
     t = Node(i, parent=home, score = 0)
   elif isSCI(get_prefix(i)) == True:
+
     t= Node(i, parent=home, score = 100)
   else:
     t = Node(i, parent=home, score = -1)
     build_reference_tree(t,i,1)
-get_score2(home)
+get_score(home)
 visualize_tree_txt(home)
 print(home.score)
