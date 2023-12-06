@@ -9,7 +9,7 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
 
         for (let i = 0; i < links.length; i++) {
             if (links.item(i).childElementCount === 0) {
-                if (links.item(i).href.includes("youtu.be")) {
+                if (links.item(i).href.includes("youtu.be") || links.item(i).href.includes("wiki")) {
                     links.item(i).style.backgroundColor = color_red;
                 } else if (links.item(i).href.includes("gutenberg")) {
                     links.item(i).style.backgroundColor = color_grey;
