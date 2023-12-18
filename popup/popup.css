@@ -5,20 +5,27 @@ html {
   /* max: 750px */
 }
 
+/* Switch container styles with border */
 .switch {
   position: relative;
   display: inline-block;
   width: 60px;
   height: 34px;
   margin-left: 10px;
+  border: 1px solid #ddd;
+  /* Border around the switch container */
+  border-radius: 4px;
+  /* Border radius for a slightly rounded look */
 }
 
+/* Hide default input styles */
 .switch input {
   opacity: 0;
   width: 0;
   height: 0;
 }
 
+/* Slider container styles with border */
 .slider {
   position: absolute;
   cursor: pointer;
@@ -27,10 +34,15 @@ html {
   right: 0;
   bottom: 0;
   background-color: #ccc;
-  -webkit-transition: .4s;
-  transition: .4s;
+  border-radius: 34px;
+  /* Make it rounder */
+  border: 1px solid #ddd;
+  /* Border around the slider container */
+  -webkit-transition: background-color 0.4s ease;
+  transition: background-color 0.4s ease;
 }
 
+/* Slider knob styles */
 .slider:before {
   position: absolute;
   content: "";
@@ -39,10 +51,15 @@ html {
   left: 4px;
   bottom: 4px;
   background-color: white;
-  -webkit-transition: .4s;
-  transition: .4s;
+  border-radius: 50%;
+  /* Make it round */
+  border: 1px solid #ddd;
+  /* Border around the knob */
+  -webkit-transition: transform 0.4s ease;
+  transition: transform 0.4s ease;
 }
 
+/* Styles when the switch is checked */
 input:checked+.slider {
   background-color: #2196F3;
 }
