@@ -1,5 +1,7 @@
 from crossref.restful import Works
 import requests
+import json
+import sys
 
 def get_paper_stats(doi):
     works = Works()
@@ -48,9 +50,53 @@ def get_paper_stats(doi):
 if __name__ == "__main__":
     # Example
     doi = "10.1145/2840723"
+
+    # For user input on command line (local support only)
+    # doi = sys.argv[1]
+    
     stats = get_paper_stats(doi)
     print(stats['citation_counts'])
     print(stats['publishers'])
     print(stats['source_types'])
     # etc : cannot find paper info
     print(stats['etc'])
+
+    citation_counts_json = {"lables": ["≥500", "≥100", "≥50", "≥10", "less than 10"], "data": [0, 0, 0, 0, 0]}
+    for k, v in stats['citation_counts'].items():
+        if v >= 500:
+            citation_counts_json["data"][0] += 1
+        elif v >= 100:
+            citation_counts_json["data"][1] += 1
+        elif v >= 50:
+            citation_counts_json["data"][2] += 1
+        elif v >= 10:
+            citation_counts_json["data"][3] += 1
+        else:
+            citation_counts_json["data"][4] += 1
+    
+    publishers_json = {"lables": [], "data": []}
+    for k, v in stats['publishers'].items():
+        publishers_json["lables"].append(k)
+        publishers_json["data"].append(v)
+    
+    source_types_json = {"lables": [], "data": []}
+    for k, v in stats['source_types'].items():
+        source_types_json["lables"].append(k)
+        source_types_json["data"].append(v)
+
+    etc_json = {"doi": stats["etc"]}
+    
+
+    with open("data/citation_counts.json", "w") as f:
+        json.dump(citation_counts_json, f)
+    
+    with open("data/publishers.json", "w") as f:
+        json.dump(publishers_json, f)
+    
+    with open("data/source_types.json", "w") as f:
+        json.dump(source_types_json, f)
+
+    with open("data/etc.json", "w") as f:
+        json.dump(etc_json, f)
+
+    

@@ -6,26 +6,18 @@
     <meta name="viewport" content="initial-scale=1, maximum-scale=1" />
     <meta name="description" content="Chrome Extension Template" />
     <link href="popup.css" rel="stylesheet" />
+
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="module" src="drawChart.js"></script>
 </head>
 
 <body>
     <h2>Welcome to EthiFact</h2>
-    <label class="switch">
-        <input type="checkbox" id="toggle">
-        <span class="slider round"></span>
-    </label>
-    <p>Toggle the switch above to enable reference verification.
-    <ul>
-        <li>
-            <span style="background-color:rgb(252,217,217); font-weight:bold">Red</span>: Untrustworthy
-        </li>
-        <li><span style="background-color:rgb(230,230,230); font-weight:bold">Grey</span>: Neutral (Need examination)
-        </li>
-        <li><span style="background-color:rgb(217, 250, 220); font-weight:bold">Green</span>: Trustworthy</li>
-    </ul>
-    </p>
+    <p>This is the examination results for DOI: <a href="https://doi.org/10.1145/2840723">10.1145/2840723</a></p>
 
+    <div id="sourceChart" style="width: 600px; height: 400px;"></div>
+    <div id="publisherChart" style="width: 600px; height: 400px;"></div>
+    <div id="citationChart" style="width: 600px; height: 400px;"></div>
 </body>
-<script src="popup.js" type="text/javascript"></script>
 
 </html>
